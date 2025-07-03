@@ -50,6 +50,7 @@ function App() {
         icon: iconLink,
       };
       setWeatherObj(newobj);
+      setValue("");
     } else {
       alert("Location can't be empty");
     }
@@ -68,6 +69,7 @@ function App() {
             placeholder="Enter Location"
             className="bg-transparent border-none outline-none p-4 text-[20px] rounded-[20px]"
             onChange={handleInput}
+            value={value}
           />
           <button
             id="search"
