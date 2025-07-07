@@ -148,9 +148,9 @@ function App() {
 
   return (
     <>
-      <header className="bg-[lavender] dark:bg-gray-900 flex px-6 py-4 min-h-[120px] items-center gap-6">
+      <header className="bg-[lavender] dark:bg-gray-900 flex flex-col md:flex-row items-center px-4 py-4 gap-4 md:gap-8">
         {/* Left: Logo */}
-        <div className="h-[100px] w-auto flex items-center">
+        <div className="h-[60px] md:h-[100px] w-auto flex items-center">
           <img
             src={logo1}
             alt="Weathora Logo"
@@ -159,10 +159,10 @@ function App() {
         </div>
 
         {/* Right: Input, Button & Error Message */}
-        <div className="flex flex-col gap-2 flex-grow items-center">
+        <div className="flex flex-col gap-2 flex-grow items-center justify-center">
           {/* Input + Locate + Search */}
-          <div className="flex items-center gap-4">
-            <div className="relative w-[250px]">
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-[500px]">
+            <div className="relative w-full sm:w-[250px]">
               <input
                 ref={inputRef}
                 type="text"
@@ -202,7 +202,7 @@ function App() {
             </div>
 
             <button
-              className="px-[30px] py-[14px] bg-[#ff5945] hover:bg-[#e94a39] text-white text-[16px] font-medium rounded-[40px] shadow-md"
+              className="w-full sm:w-auto px-[30px] py-[14px] bg-[#ff5945] hover:bg-[#e94a39] text-white text-[16px] font-medium rounded-[40px] shadow-md"
               onClick={handleClick}
             >
               Search
@@ -211,7 +211,7 @@ function App() {
 
           {/* Error Message */}
           {error && (
-            <div className="text-sm text-red-500 bg-red-50 border border-red-200 px-4 py-2 rounded-md shadow w-[300px] text-center">
+            <div className="text-sm text-red-500 bg-red-50 border border-red-200 px-4 py-2 rounded-md shadow w-full max-w-[300px] text-center">
               ⚠️ {error}
             </div>
           )}
@@ -219,7 +219,7 @@ function App() {
       </header>
 
       <main
-        className={`h-[calc(100vh-120px)] flex items-center justify-center text-black dark:text-white transition-all duration-700 ${getBackgroundClass(
+        className={`min-h-[calc(100vh-120px)] px-4 py-6 md:px-10 flex items-center justify-center text-black transition-all duration-700 ${getBackgroundClass(
           weatherObj.condition
         )}`}
       >
@@ -242,9 +242,13 @@ function App() {
               <span className="date">{weatherObj.date}</span>
             </div>
             <div className="weather-state">
-              <div className="w-[80px] h-[80px] flex items-center justify-center">
+              <div className="w-[80px] h-[80px] flex flex-col items-center justify-center">
                 {weatherObj.icon ? (
-                  <img src={weatherObj.icon} alt="icon" className="w-[80px]" />
+                  <img
+                    src={weatherObj.icon}
+                    alt={weatherObj.condition}
+                    className="w-[60px] md:w-[80px]"
+                  />
                 ) : (
                   <span className="text-gray-400 text-3xl">--</span>
                 )}
