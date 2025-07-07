@@ -13,6 +13,24 @@ function App() {
     icon: null,
   });
 
+  function getBackgroundClass(condition) {
+    const text = condition.toLowerCase();
+
+    if (text.includes("sun") || text.includes("clear")) {
+      return "bg-gradient-to-b from-yellow-200 to-yellow-400"; // Softer yellow
+    } else if (text.includes("cloud") || text.includes("overcast")) {
+      return "bg-gradient-to-b from-gray-300 to-gray-600";
+    } else if (text.includes("rain") || text.includes("drizzle")) {
+      return "bg-gradient-to-b from-blue-300 to-blue-700";
+    } else if (text.includes("snow")) {
+      return "bg-gradient-to-b from-blue-100 to-gray-100";
+    } else if (text.includes("thunder") || text.includes("storm")) {
+      return "bg-gradient-to-b from-gray-700 to-black";
+    } else {
+      return "bg-[rgb(0,34,65)]"; // Default
+    }
+  }
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -200,7 +218,11 @@ function App() {
         </div>
       </header>
 
-      <main className="h-[calc(100vh-100px)] bg-[rgb(0,34,65)] flex items-center justify-center text-white">
+      <main
+        className={`h-[calc(100vh-120px)] flex items-center justify-center text-black dark:text-white transition-all duration-700 ${getBackgroundClass(
+          weatherObj.condition
+        )}`}
+      >
         {loading ? (
           <div className="flex flex-col items-center gap-4">
             <div className="w-16 h-16 border-4 border-white border-t-[#ff5945] rounded-full animate-spin"></div>
