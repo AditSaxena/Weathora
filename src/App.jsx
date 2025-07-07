@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import logo from "./assets/images/logo.jpg";
+import logo1 from "./assets/images/logo1.png";
 
 function App() {
   const [value, setValue] = useState("");
@@ -152,7 +152,7 @@ function App() {
         {/* Left: Logo */}
         <div className="h-[100px] w-auto flex items-center">
           <img
-            src={logo}
+            src={logo1}
             alt="Weathora Logo"
             className="h-full w-auto object-contain"
           />
