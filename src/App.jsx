@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
+import logo from "./assets/images/logo.jpg";
+
 function App() {
   const [value, setValue] = useState("");
   const [weatherObj, setWeatherObj] = useState({
@@ -128,56 +130,76 @@ function App() {
 
   return (
     <>
-      <header className="bg-[lavender] flex flex-col items-center justify-center py-6 space-y-2">
-        <div className="flex items-center gap-4">
-          <div className="relative w-[250px]">
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Enter Location"
-              className="bg-white text-black placeholder:text-gray-500 border border-gray-300 outline-none p-4 text-[18px] rounded-[20px] w-[250px] shadow-sm"
-              onChange={handleInput}
-              value={value}
-            />
-            <button
-              onClick={getLocationAndSetValue}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-100 hover:bg-gray-200 text-gray-600 p-2 rounded-full transition"
-              title="Use Current Location"
-            >
-              {/* Locate icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="2" x2="12" y2="6" />
-                <line x1="12" y1="18" x2="12" y2="22" />
-                <line x1="2" y1="12" x2="6" y2="12" />
-                <line x1="18" y1="12" x2="22" y2="12" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-            </button>
-          </div>
-          <button
-            className="px-[30px] py-[14px] bg-[#ff5945] hover:bg-[#e94a39] text-white text-[16px] font-medium rounded-[40px] shadow-md"
-            onClick={handleClick}
-          >
-            Search
-          </button>
+      <header className="bg-[lavender] dark:bg-gray-900 flex px-6 py-4 min-h-[120px] items-center gap-6">
+        {/* Left: Logo */}
+        <div className="h-[100px] w-auto flex items-center">
+          <img
+            src={logo}
+            alt="Weathora Logo"
+            className="h-full w-auto object-contain"
+          />
         </div>
 
-        {error && (
-          <div className="mt-2 text-sm text-red-500 bg-red-50 border border-red-200 px-4 py-2 rounded-md shadow w-[300px] text-center">
-            ⚠️ {error}
+        {/* Right: Input, Button & Error Message */}
+        <div className="flex flex-col gap-2 flex-grow items-center">
+          {/* Input + Locate + Search */}
+          <div className="flex items-center gap-4">
+            <div className="relative w-[250px]">
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Enter Location"
+                className="w-full bg-white text-black placeholder:text-gray-500 border border-gray-300 outline-none p-4 pr-12 text-[18px] rounded-[20px] shadow-sm"
+                onChange={handleInput}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleClick();
+                  }
+                }}
+                value={value}
+              />
+              <button
+                onClick={getLocationAndSetValue}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-100 hover:bg-gray-200 text-gray-600 p-2 rounded-full transition"
+                title="Use Current Location"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-4 h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="2" x2="12" y2="6" />
+                  <line x1="12" y1="18" x2="12" y2="22" />
+                  <line x1="2" y1="12" x2="6" y2="12" />
+                  <line x1="18" y1="12" x2="22" y2="12" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+
+            <button
+              className="px-[30px] py-[14px] bg-[#ff5945] hover:bg-[#e94a39] text-white text-[16px] font-medium rounded-[40px] shadow-md"
+              onClick={handleClick}
+            >
+              Search
+            </button>
           </div>
-        )}
+
+          {/* Error Message */}
+          {error && (
+            <div className="text-sm text-red-500 bg-red-50 border border-red-200 px-4 py-2 rounded-md shadow w-[300px] text-center">
+              ⚠️ {error}
+            </div>
+          )}
+        </div>
       </header>
+
       <main className="h-[calc(100vh-100px)] bg-[rgb(0,34,65)] flex items-center justify-center text-white">
         {loading ? (
           <div className="flex flex-col items-center gap-4">
@@ -198,8 +220,12 @@ function App() {
               <span className="date">{weatherObj.date}</span>
             </div>
             <div className="weather-state">
-              <div>
-                <img src={weatherObj.icon} alt="icon" className="w-[80px]" />
+              <div className="w-[80px] h-[80px] flex items-center justify-center">
+                {weatherObj.icon ? (
+                  <img src={weatherObj.icon} alt="icon" className="w-[80px]" />
+                ) : (
+                  <span className="text-gray-400 text-3xl">--</span>
+                )}
               </div>
               <div className="condition">{weatherObj.condition}</div>
             </div>
