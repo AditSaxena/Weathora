@@ -6,7 +6,7 @@ Weathora is a clean and responsive weather app built using **React.js**. It fetc
 
 ## 🌐 Live Demo
 
-[🔗 View Weathora Live](https://aditsaxena.github.io/Weathora/)
+[🔗 View Weathora Live](https://weathora-blue.vercel.app/)
 
 ---
 
