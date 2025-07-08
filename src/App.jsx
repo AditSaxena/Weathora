@@ -237,9 +237,9 @@ function App() {
               <div className="text-[30px] text-[yellowgreen]">
                 {weatherObj.location}
               </div>
-              <span className="time">{weatherObj.time}</span>
+              <span className="time text-white">{weatherObj.time}</span>
               &nbsp; &nbsp;
-              <span className="date">{weatherObj.date}</span>
+              <span className="date text-white">{weatherObj.date}</span>
             </div>
             <div className="weather-state">
               <div className="w-[80px] h-[80px] flex flex-col items-center justify-center">
@@ -253,7 +253,7 @@ function App() {
                   <span className="text-gray-400 text-3xl">--</span>
                 )}
               </div>
-              <div className="condition">{weatherObj.condition}</div>
+              <div className="condition text-white">{weatherObj.condition}</div>
             </div>
           </div>
         )}
